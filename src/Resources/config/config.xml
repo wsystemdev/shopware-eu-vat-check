@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>EU VAT check (VIES)</title>
+        <title lang="de-DE">EU-USt-IdNr.-Prüfung (VIES)</title>
+        <input-field type="password">
+            <name>apiKey</name>
+            <label>W System API key (optional)</label>
+            <label lang="de-DE">W System API-Schlüssel (optional)</label>
+            <helpText>Without a key the free tier applies (20 checks per day per server IP). Get a free key at https://wsystem.dev/pricing</helpText>
+            <helpText lang="de-DE">Ohne Schlüssel gilt die kostenlose Stufe (20 Prüfungen pro Tag und Server-IP). Kostenloser Schlüssel: https://wsystem.dev/pricing</helpText>
+        </input-field>
+        <input-field>
+            <name>requesterVatId</name>
+            <label>Your own VAT ID (optional, for a VIES consultation number)</label>
+            <label lang="de-DE">Eigene USt-IdNr. (optional, für eine VIES-Abfragenummer)</label>
+        </input-field>
+        <input-field type="single-select">
+            <name>onInvalid</name>
+            <label>When VIES says the VAT ID is invalid</label>
+            <label lang="de-DE">Wenn VIES die USt-IdNr. als ungültig meldet</label>
+            <defaultValue>block</defaultValue>
+            <options>
+                <option><id>block</id><name>Reject it (customer must fix or remove it)</name><name lang="de-DE">Ablehnen (Kunde muss sie korrigieren oder entfernen)</name></option>
+                <option><id>allow</id><name>Accept it anyway</name><name lang="de-DE">Trotzdem akzeptieren</name></option>
+            </options>
+        </input-field>
+        <input-field type="single-select">
+            <name>onUnavailable</name>
+            <label>When VIES is unavailable</label>
+            <label lang="de-DE">Wenn VIES nicht erreichbar ist</label>
+            <defaultValue>allow</defaultValue>
+            <options>
+                <option><id>allow</id><name>Accept the VAT ID (check the order later)</name><name lang="de-DE">USt-IdNr. akzeptieren (Bestellung später prüfen)</name></option>
+                <option><id>block</id><name>Reject it and ask to try again</name><name lang="de-DE">Ablehnen und erneut versuchen lassen</name></option>
+            </options>
+        </input-field>
+    </card>
+</config>

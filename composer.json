@@ -1,0 +1,62 @@
+{
+    "name": "wsystem/shopware-eu-vat-check",
+    "description": "Live EU VAT ID check (VIES) for Shopware 6 registration and checkout: only VAT IDs confirmed by VIES get the tax-free company price, and the VIES consultation number is stored on the order.",
+    "type": "shopware-platform-plugin",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "shopware",
+        "vies",
+        "vat",
+        "ust-idnr",
+        "reverse-charge",
+        "eu"
+    ],
+    "homepage": "https://github.com/wsystemdev/shopware-eu-vat-check",
+    "authors": [
+        {
+            "name": "W System",
+            "homepage": "https://wsystem.dev"
+        }
+    ],
+    "support": {
+        "email": "hello@wsystem.dev",
+        "issues": "https://github.com/wsystemdev/shopware-eu-vat-check/issues"
+    },
+    "require": {
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "shopware/core": "~6.6.0 || ~6.7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5 || ^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WSystem\\EuVatCheck\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WSystem\\EuVatCheck\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "WSystem\\EuVatCheck\\WSystemEuVatCheck",
+        "label": {
+            "en-GB": "EU VAT check (VIES) by W System",
+            "de-DE": "EU-USt-IdNr.-Prüfung (VIES) von W System"
+        },
+        "description": {
+            "en-GB": "Checks VAT IDs live against VIES at registration and stores the consultation number on orders.",
+            "de-DE": "Prüft USt-IdNr. bei der Registrierung live über VIES und speichert die Abfragenummer an der Bestellung."
+        },
+        "manufacturerLink": {
+            "en-GB": "https://wsystem.dev",
+            "de-DE": "https://wsystem.dev"
+        },
+        "supportLink": {
+            "en-GB": "mailto:hello@wsystem.dev",
+            "de-DE": "mailto:hello@wsystem.dev"
+        }
+    }
+}

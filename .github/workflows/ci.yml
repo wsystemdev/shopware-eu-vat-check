@@ -1,0 +1,35 @@
+name: CI
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shopware: ["v6.6.10.9", "v6.7.15.1"]
+    steps:
+      - uses: shopware/setup-shopware@main
+        with:
+          shopware-version: ${{ matrix.shopware }}
+          php-version: "8.3"
+          install: true
+      - uses: actions/checkout@v4
+        with:
+          path: custom/plugins/WSystemEuVatCheck
+      - name: Install and activate the plugin
+        run: |
+          bin/console plugin:refresh
+          bin/console plugin:install --activate WSystemEuVatCheck
+          bin/console cache:clear
+          mysql -uroot -h127.0.0.1 shopware -N -e "SELECT name FROM custom_field_set WHERE name='wsystem_vat'" | grep -q wsystem_vat
+      - name: Unit tests
+        run: |
+          composer require --dev -W phpunit/phpunit:^11 --no-interaction --no-scripts || true
+          SHOPWARE_AUTOLOAD=$PWD/vendor/autoload.php vendor/bin/phpunit -c custom/plugins/WSystemEuVatCheck/phpunit.xml.dist
+      - name: Store API e2e (registration)
+        run: |
+          (APP_ENV=prod php -S 127.0.0.1:8000 -t public public/index.php > /tmp/server.log 2>&1 &)
+          sleep 3
+          bash custom/plugins/WSystemEuVatCheck/tests/e2e/register_e2e.sh
+      - if: failure()
+        run: tail -100 /tmp/server.log var/log/*.log 2>/dev/null || true
