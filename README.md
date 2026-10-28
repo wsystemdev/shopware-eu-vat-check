@@ -20,16 +20,17 @@ Stop fake or mistyped VAT IDs from getting the tax-free company price in your Sh
 
 ## Install
 
-With Composer (recommended):
+Download `WSystemEuVatCheck-<version>.zip` from the [latest release](https://github.com/wsystemdev/shopware-eu-vat-check/releases), then upload it in **Extensions > My extensions > Upload extension** and activate it.
+
+With Composer (the package is not on Packagist yet, so add this repository first):
 
 ```bash
-composer require wsystem/shopware-eu-vat-check
+composer config repositories.wsystem-shopware vcs https://github.com/wsystemdev/shopware-eu-vat-check
+composer require wsystem/shopware-eu-vat-check:^0.1
 bin/console plugin:refresh
 bin/console plugin:install --activate WSystemEuVatCheck
 bin/console cache:clear
 ```
-
-Or download the zip from the [latest release](https://github.com/wsystemdev/shopware-eu-vat-check/releases), then upload it in **Extensions > My extensions > Upload extension**.
 
 ## Settings
 
