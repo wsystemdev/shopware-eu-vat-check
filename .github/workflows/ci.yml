@@ -3,6 +3,9 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      # old Shopware patch releases pin dependencies with known advisories; CI only
+      COMPOSER_NO_SECURITY_BLOCKING: "1"
     strategy:
       fail-fast: false
       matrix:
