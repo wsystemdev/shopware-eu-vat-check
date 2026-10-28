@@ -69,6 +69,9 @@ final class SubscriberTest extends TestCase
         $s->onBuildValidation(new BuildValidationEvent($def, new DataBag(), Context::createDefaultContext()));
         $constraints = $def->getProperties()['vatIds'];
         self::assertInstanceOf(Callback::class, $constraints[0]);
+        foreach (['WSYSTEM_VAT_FORMAT', 'WSYSTEM_VAT_COUNTRY_MISMATCH', 'WSYSTEM_VAT_INVALID', 'WSYSTEM_VAT_UNAVAILABLE'] as $c) {
+            self::assertSame($c, $constraints[0]::getErrorName($c));
+        }
         $violations = Validation::createValidator()->validate(['DE123456789'], $constraints);
         self::assertCount(1, $violations);
         self::assertSame(VatDecision::ERR_INVALID, $violations[0]->getCode());

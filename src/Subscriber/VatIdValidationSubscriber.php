@@ -9,7 +9,7 @@ use Shopware\Core\Framework\Validation\DataBag\DataBag;
 use Shopware\Core\System\Country\CountryEntity;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Validator\Constraints\Callback;
+use WSystem\EuVatCheck\Validation\VatIdCallback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use WSystem\EuVatCheck\Service\VatApiClient;
 use WSystem\EuVatCheck\Service\VatDecision;
@@ -54,7 +54,7 @@ class VatIdValidationSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         $billingCountry = $this->billingIso($data, $event->getContext());
-        $event->getDefinition()->add('vatIds', new Callback(
+        $event->getDefinition()->add('vatIds', new VatIdCallback(
             callback: function (mixed $value, ExecutionContextInterface $ctx) use ($billingCountry): void {
                 foreach ($this->violations($value, $billingCountry) as $code) {
                     $ctx->buildViolation(self::MESSAGES[$code])->setCode($code)->addViolation();
