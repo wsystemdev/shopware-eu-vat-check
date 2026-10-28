@@ -1,5 +1,7 @@
 # EU VAT check (VIES) for Shopware 6
 
+Guide with setup steps: https://wsystem.dev/shopware-eu-vat-check?ref=shopware-github
+
 Stop fake or mistyped VAT IDs from getting the tax-free company price in your Shopware shop. This plugin checks every VAT ID live against the EU VIES database when a business customer registers or edits their profile, and stores the VIES evidence (status, consultation number, company name, date) on each order.
 
 - Works with Shopware 6.6 and 6.7.
