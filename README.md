@@ -8,7 +8,7 @@ Stop fake or mistyped VAT IDs from getting the tax-free company price in your Sh
 - Uses Shopware's own VAT ID field and its own **Tax-free for companies** setting, so prices and invoices keep working the way Shopware does them. The plugin only makes sure the VAT ID is real.
 - Rejects VAT IDs that VIES reports invalid (configurable), and VAT IDs whose country doesn't match the billing country.
 - If VIES is down, it accepts the VAT ID by default (configurable), so checkout isn't blocked by an EU outage.
-- Free to use without a key (20 checks per day per server IP). Add a key for more.
+- Free to use without a key (20 checks per day per server IP). For more, add a [free API key](https://api.wsystem.dev/account/free-key?ref=shopware-plugin) (500 units a month, no card).
 
 ## How it works
 
@@ -20,17 +20,20 @@ Stop fake or mistyped VAT IDs from getting the tax-free company price in your Sh
 
 ## Install
 
-Download `WSystemEuVatCheck-<version>.zip` from the [latest release](https://github.com/wsystemdev/shopware-eu-vat-check/releases), then upload it in **Extensions > My extensions > Upload extension** and activate it.
-
-With Composer (the package is not on Packagist yet, so add this repository first):
+With Composer (recommended), from your Shopware root. The package is on Packagist: [wsystem/shopware-eu-vat-check](https://packagist.org/packages/wsystem/shopware-eu-vat-check).
 
 ```bash
-composer config repositories.wsystem-shopware vcs https://github.com/wsystemdev/shopware-eu-vat-check
-composer require wsystem/shopware-eu-vat-check:^0.1
+composer require wsystem/shopware-eu-vat-check
 bin/console plugin:refresh
 bin/console plugin:install --activate WSystemEuVatCheck
 bin/console cache:clear
 ```
+
+Fallback without Composer: download `WSystemEuVatCheck-<version>.zip` from the [latest release](https://github.com/wsystemdev/shopware-eu-vat-check/releases), then upload it in **Extensions > My extensions > Upload extension** and activate it.
+
+## Free API key
+
+The plugin works without a key (20 checks per day per server IP). For more, get a free W System API key with 500 units a month (email only, no card) at https://api.wsystem.dev/account/free-key?ref=shopware-plugin and paste it into the plugin settings. The same key also covers the W System e-invoicing endpoints (EN 16931 / XRechnung validation, Peppol UBL creation), useful if your shop has to issue e-invoices to German or Belgian business customers.
 
 ## Settings
 
@@ -38,7 +41,7 @@ bin/console cache:clear
 
 | Setting | Default | What it does |
 |---|---|---|
-| W System API key | empty | Optional. Without a key the free tier applies. Free key: https://wsystem.dev/pricing |
+| W System API key | empty | Optional. Without a key the free tier applies (20 checks per day per server IP). Free key with 500 units a month: https://api.wsystem.dev/account/free-key?ref=shopware-plugin |
 | Your own VAT ID | empty | Optional. When set, VIES returns a consultation number you can keep as proof of the check. |
 | When VIES says the VAT ID is invalid | Reject it | Or accept it anyway. |
 | When VIES is unavailable | Accept the VAT ID | Or reject it and ask the customer to try again. |

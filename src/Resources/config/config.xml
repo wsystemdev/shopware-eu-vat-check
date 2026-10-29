@@ -8,8 +8,8 @@
             <name>apiKey</name>
             <label>W System API key (optional)</label>
             <label lang="de-DE">W System API-Schlüssel (optional)</label>
-            <helpText>Without a key the free tier applies (20 checks per day per server IP). Get a free key at https://wsystem.dev/pricing</helpText>
-            <helpText lang="de-DE">Ohne Schlüssel gilt die kostenlose Stufe (20 Prüfungen pro Tag und Server-IP). Kostenloser Schlüssel: https://wsystem.dev/pricing</helpText>
+            <helpText>Without a key the free tier applies (20 checks per day per server IP). Get a free key (500 units a month, no card) at https://api.wsystem.dev/account/free-key?ref=shopware-plugin</helpText>
+            <helpText lang="de-DE">Ohne Schlüssel gilt die kostenlose Stufe (20 Prüfungen pro Tag und Server-IP). Kostenloser Schlüssel (500 Einheiten pro Monat, ohne Karte): https://api.wsystem.dev/account/free-key?ref=shopware-plugin</helpText>
         </input-field>
         <input-field>
             <name>requesterVatId</name>
